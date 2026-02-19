@@ -12,10 +12,19 @@ RestartSec=5
 [Install]
 WantedBy=default.target
 
-
 -----
-Then enable and start the service...
+Set up to work without sudo...
+sudo emacs /etc/udev/rules.d/99-backlight.rules
 
+This will be an empty file. Add:
+SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/brightness"
+SUBSYSTEM=="backlight", RUN+="/bin/chmod 0666 /sys/class/backlight/%k/bl_power"
+
+Then:
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
+Then enable and start the service...
 systemctl --user daemon-reload
 systemctl --user enable --now brightnessd.service
 systemctl --user status brightnessd.service --no-pager
