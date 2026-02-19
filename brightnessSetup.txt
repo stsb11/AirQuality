@@ -1,0 +1,21 @@
+Create ~/.config/systemd/user/brightnessd.service
+
+[Unit]
+Description=Backlight brightness scheduler (sunrise/sunset + overnight off)
+
+[Service]
+Type=simple
+ExecStart=/home/pi/air_display/venv/bin/python /home/pi/air_display/brightnessd.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+
+
+-----
+Then enable and start the service...
+
+systemctl --user daemon-reload
+systemctl --user enable --now brightnessd.service
+systemctl --user status brightnessd.service --no-pager
