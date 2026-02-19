@@ -16,7 +16,6 @@ LON = -0.31629
 BRIGHTNESS_PATH = "/sys/class/backlight/10-0045/brightness"
 BL_POWER_PATH   = "/sys/class/backlight/10-0045/bl_power"
 
-
 # Your policy
 OFF_START = (0, 30)   # 00:30
 OFF_END   = (6, 0)    # 06:00
